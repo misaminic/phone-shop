@@ -17,8 +17,8 @@ const Modal = () => {
                 id="modal"
                 className="col-8 mx-auto col-md-6 col-lg-4 text-center text-capitalize p-5"
               >
-                <img src={img} alt={title} className="img-fluid" />
                 <h5>{title}</h5>
+                <img src={img} alt={title} className="img-fluid" />
                 <h5 className="text-muted">price : ${price}</h5>
                 <Link to="/">
                   <ButtonContainer onClick={() => closeModal()}>

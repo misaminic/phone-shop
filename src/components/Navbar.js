@@ -3,8 +3,12 @@ import { Link } from 'react-router-dom';
 import logo from '../logo.svg';
 import styled from 'styled-components';
 import { ButtonContainer } from './Button';
+import { useGlobalContext } from '../context';
 
 const Navbar = () => {
+  const { cartItemsTotal } = useGlobalContext();
+  console.log(cartItemsTotal);
+
   return (
     <NavWrapper className="navbar navbar-expand-sm navbar-dark px-sm-5">
       {/* 
@@ -23,7 +27,11 @@ https://www.iconfinder.com/Makoto_msk */}
       </ul>
       <Link to="/cart" className="ml-auto">
         <ButtonContainer className="cart-button-homepage">
-          <span>
+          <span className="cart-items-total-container">
+            {cartItemsTotal > 0 && (
+              <span className="cart-items-total">{cartItemsTotal}</span>
+            )}
+
             <i className="fas fa-cart-plus icon-color"></i>
           </span>
         </ButtonContainer>

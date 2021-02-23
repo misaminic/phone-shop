@@ -12,6 +12,7 @@ function AppProvider({ children }) {
   const [cartSubTotal, setCartSubTotal] = useState(0);
   const [cartTax, setCartTax] = useState(0);
   const [cartTotal, setCartTotal] = useState(0);
+  const [cartItemsTotal, setCartItemsTotal] = useState(0);
 
   useEffect(() => {
     let tempProducts = [];
@@ -51,7 +52,10 @@ function AppProvider({ children }) {
     // update the state with the changes above
     setProductList(tempProducts);
     setCart([...cart, product]);
+    setCartItemsTotal(cartItemsTotal + 1);
   };
+
+  console.log(cartItemsTotal);
 
   const openModal = (id) => {
     const product = getItem(id);
@@ -79,6 +83,7 @@ function AppProvider({ children }) {
     if (tempProduct.count === 0) {
       removeItem(id);
       setProductList(productList);
+      setCartItemsTotal(cartItemsTotal - 1);
     } else {
       tempProduct.total = tempProduct.price * tempProduct.count;
       setCart([...cart]);
@@ -97,6 +102,7 @@ function AppProvider({ children }) {
     tempProductsInProductList.count = 0;
     tempProductsInProductList.total = 0;
     setProductList([...productList]);
+    setCartItemsTotal(cartItemsTotal - 1);
   };
 
   const clearCart = () => {
@@ -105,6 +111,7 @@ function AppProvider({ children }) {
     clearInCartValue.map((item) => {
       return (item.inCart = false);
     });
+    setCartItemsTotal(0);
   };
 
   const addTotals = () => {
@@ -129,6 +136,7 @@ function AppProvider({ children }) {
         cartSubTotal,
         cartTax,
         cartTotal,
+        cartItemsTotal,
         handleDetail,
         addToCart,
         openModal,
